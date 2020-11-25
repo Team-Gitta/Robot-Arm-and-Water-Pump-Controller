@@ -121,13 +121,26 @@ int main(void)
     int num;
 
     //초기값
-
-    /*TIM3->CCR1 = 250;
+/*
+    TIM3->CCR1 = 250;
     TIM3->CCR2 = 100;
     TIM3->CCR3 = 100;
     TIM12->CCR1 = 420;
     TIM12->CCR2 = 460;
-    */
+*/
+    //MOTOR_WATERPUMP
+        //1: LEFT
+        //2: RIGHT
+    /*
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET); //ENA1
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET); //ENA2
+
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_8, SET); //FORWARD_1
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_9, RESET); //FORWARD_1
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10, SET); //FORWARD_2
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_11, RESET); //FORWARD_2
+         * */
+
 
     //화분_1
     /*
@@ -136,6 +149,13 @@ int main(void)
     TIM3->CCR3 = 350;
     TIM12->CCR1 = 450;
     TIM12->CCR2 = 460;*/
+    //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET); //ENA1
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET); //ENA2
+
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_8, SET); //FORWARD_1
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_9, RESET); //FORWARD_1
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10, SET); //FORWARD_2
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_11, RESET); //FORWARD_2
 
     if (HAL_UART_Receive(&huart2, &a, 1, 100) == HAL_OK){
     	//HAL_UART_Transmit(&huart2, &b, 1, 100);
@@ -145,14 +165,25 @@ int main(void)
     		TIM3->CCR3 = 350;
     		TIM12->CCR1 = 450;
     		TIM12->CCR2 = 460;
-    	}
+
+
+    		}
+
     	if(a=='7'){
-    		TIM3->CCR1 = 250;
-    		TIM3->CCR2 = 100;
-   	    	TIM3->CCR3 = 100;
-   	    	TIM12->CCR1 = 420;
-   	    	TIM12->CCR2 = 460;
+    		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET);
   	    }
+
+    	if(a=='6'){
+    	    		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+    	}
+    	if(a=='5'){
+    				TIM3->CCR1 = 250;
+    	   	    	TIM3->CCR2 = 100;
+    	    	    TIM3->CCR3 = 100;
+    	    	    TIM12->CCR1 = 420;
+    	    	    TIM12->CCR2 = 460;
+    	}
+ //   	if
 //    		TIM3->CCR1 = 350;
 //    		TIM3->CCR2 = 350;
 //    		TIM3->CCR3 = 350;
@@ -160,16 +191,7 @@ int main(void)
 //    			TIM12->CCR2 = 350;
 //    	}
     }
-    //MOTOR_WATERPUMP
-    //1: LEFT
-    //2: RIGHT
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET); //ENA1
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET); //ENA2
 
-    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_8, SET); //FORWARD_1
-    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_9, RESET); //FORWARD_1
-    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10, SET); //FORWARD_2
-    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_11, RESET); //FORWARD_2
   }
   /* USER CODE END 3 */
 }
